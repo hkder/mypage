@@ -42,6 +42,7 @@
   --text-code: 14px;
   --text-year: 28px;               /* year numeral in the Home gutter */
   --text-name: 17px;               /* site name */
+  --size-site-mark: 32px;
   --leading-body: 1.6;
   --leading-tight: 1.15;
   --leading-ui: 1.5;

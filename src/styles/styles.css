@@ -35,9 +35,11 @@ summary::-webkit-details-marker { display: none; }
 /* ---------- frame (identical on every page) ---------- */
 .page {
   max-width: var(--page-max);
+  min-height: 100svh;
   margin: 0 auto;
   padding: var(--page-padding-y) var(--page-padding-x);
   display: grid;
+  grid-template-rows: auto 1fr auto;
   grid-template-columns: minmax(0, 1fr) var(--rail-width);
   grid-template-areas:
     "header header"
@@ -57,12 +59,12 @@ summary::-webkit-details-marker { display: none; }
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
   gap: var(--space-2) var(--space-5);
   margin-bottom: var(--header-gap);
   font-family: var(--font-ui);
 }
-.site-name { font-size: var(--text-name); font-weight: 700; color: var(--color-ink); text-decoration: none; letter-spacing: -0.01em; }
+.site-mark { display: block; width: var(--size-site-mark); height: var(--size-site-mark); flex-shrink: 0; }
 .site-nav { display: flex; flex-wrap: wrap; gap: var(--space-1) 22px; font-size: var(--text-ui); }
 .site-nav a { color: var(--color-ink-2); text-decoration: none; }
 .site-nav a:hover { text-decoration: underline; }
@@ -191,7 +193,8 @@ summary::-webkit-details-marker { display: none; }
 
 /* ---------- mobile ---------- */
 @media (max-width: 720px) {
-  .page, .page:has(.main--list) { grid-template-columns: minmax(0, 1fr); grid-template-areas: "header" "rail" "main" "footer"; row-gap: 28px; }
+  .page, .page:has(.main--list) { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto 1fr auto; grid-template-areas: "header" "rail" "main" "footer"; row-gap: 28px; }
+  .page:has(.main--post), .page:has(.main--about) { grid-template-rows: auto 1fr auto; }
   .page:has(.main--post) { grid-template-areas: "header" "main" "footer"; row-gap: 0; }
   .rail--post { display: none; }
   .toc--mobile { display: block; margin: 0 0 var(--space-5); font-family: var(--font-ui); font-size: var(--text-ui); }
@@ -211,7 +214,7 @@ summary::-webkit-details-marker { display: none; }
 /* Print: drop chrome, keep the article */
 @media print {
   .site-nav, .rail, .post-footer, .skip { display: none; }
-  .page { display: block; padding: 0; }
+  .page { display: block; min-height: 0; padding: 0; }
   a { color: inherit; }
 }
 
