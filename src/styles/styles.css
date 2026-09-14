@@ -64,7 +64,8 @@ summary::-webkit-details-marker { display: none; }
   margin-bottom: var(--header-gap);
   font-family: var(--font-ui);
 }
-.site-mark { display: block; width: var(--size-site-mark); height: var(--size-site-mark); flex-shrink: 0; }
+.site-mark { display: inline-flex; align-items: center; gap: var(--space-2); flex-shrink: 0; color: var(--color-ink); font-size: var(--text-name); font-weight: 700; text-decoration: none; white-space: nowrap; }
+.site-mark img { width: var(--size-site-mark); height: var(--size-site-mark); }
 .site-nav { display: flex; flex-wrap: wrap; gap: var(--space-1) 22px; font-size: var(--text-ui); }
 .site-nav a { color: var(--color-ink-2); text-decoration: none; }
 .site-nav a:hover { text-decoration: underline; }

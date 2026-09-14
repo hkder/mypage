@@ -19,17 +19,17 @@ const canonical = new URL(Astro.url.pathname, site.url);
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>{title} · {site.name}</title>
+        <title>{title} · {site.title}</title>
         <meta name="description" content={description} />
         <link rel="canonical" href={canonical} />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <link rel="alternate" type="application/rss+xml" title={site.name} href="/rss.xml" />
-        <link rel="alternate" type="application/atom+xml" title={site.name} href="/atom.xml" />
-        <meta property="og:title" content={`${title} · ${site.name}`} />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=tree" />
+        <link rel="alternate" type="application/rss+xml" title={site.title} href="/rss.xml" />
+        <link rel="alternate" type="application/atom+xml" title={site.title} href="/atom.xml" />
+        <meta property="og:title" content={`${title} · ${site.title}`} />
         <meta property="og:description" content={description} />
         <meta property="og:url" content={canonical} />
         <meta property="og:type" content={article ? 'article' : 'website'} />
-        <meta property="og:site_name" content={site.name} />
+        <meta property="og:site_name" content={site.title} />
         {noindex && <meta name="robots" content="noindex" />}
     </head>
     <body>

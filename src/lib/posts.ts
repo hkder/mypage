@@ -2,6 +2,7 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 
 export type Post = CollectionEntry<'posts'>;
 export const site = {
+    title: "Hosung's Blog",
     name: 'Hosung Kim',
     url: 'https://hosungk.com',
     description: 'Notes on federated learning, machine learning, and the systems behind them.',

@@ -13,7 +13,7 @@ export async function GET() {
 ${post.data.tags.map((tag) => `<category term="${xml(tag)}"/>`).join('')}</entry>`;
     }).join('');
     return new Response(`<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>${xml(site.name)}</title>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>${xml(site.title)}</title>
 <subtitle>${xml(site.description)}</subtitle><id>${site.url}/</id>
 <link href="${site.url}/"/><link href="${site.url}/atom.xml" rel="self"/>
 <updated>${new Date(updated).toISOString()}</updated><author><name>${xml(site.name)}</name></author>

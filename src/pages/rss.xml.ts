@@ -3,7 +3,7 @@ import { publishedPosts, postUrl, site } from '../lib/posts';
 
 export async function GET() {
     return rss({
-        title: site.name,
+        title: site.title,
         description: site.description,
         site: site.url,
         items: (await publishedPosts()).map((post) => ({
