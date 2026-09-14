@@ -52,6 +52,7 @@ summary::-webkit-details-marker { display: none; }
 .page:has(.main--wide), .page:has(.main--about) { grid-template-columns: minmax(0, 1fr); grid-template-areas: "header" "main" "footer"; }
 .main { grid-area: main; min-width: 0; }
 .rail { grid-area: rail; min-width: 0; }
+.page:has(.main--list) > .rail { margin-inline: var(--space-5) calc(-1 * var(--space-5)); }
 
 /* ---------- header ---------- */
 .site-header {
@@ -194,6 +195,7 @@ summary::-webkit-details-marker { display: none; }
 
 /* ---------- mobile ---------- */
 @media (max-width: 720px) {
+  .page:has(.main--list) > .rail { margin-inline: 0; }
   .page, .page:has(.main--list) { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto 1fr auto; grid-template-areas: "header" "rail" "main" "footer"; row-gap: 28px; }
   .page:has(.main--post), .page:has(.main--about) { grid-template-rows: auto 1fr auto; }
   .page:has(.main--post) { grid-template-areas: "header" "main" "footer"; row-gap: 0; }

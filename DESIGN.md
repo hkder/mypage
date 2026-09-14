@@ -10,6 +10,7 @@ A quiet, reading-first personal engineering notebook. The exact contract is the 
 Preserve every source type token: Charter/Bitstream Charter/Georgia body, system sans UI, system monospace code, math serif stack. Desktop body/row 19px, h1 36px, h2 25px, h3 20px; UI 14px, small 13px, label 11px, year 28px, name 17px. Body leading 1.6. At <=720px use the exact mobile overrides (body 17px, row 16px, h1 26px, h2 21px). Fonts remain system-local, with no remote font request.
 
 ## 4. Spacing & Layout
+Home/tag sidebar update: offset the introduction, links and tags 24px (`--space-5`) to the right above 720px, retaining its width and the main/header positions. Mobile has no offset.
 Footer update: the page fills at least the viewport height. Extra space belongs to the main content row so the footer sits at the bottom of short pages, with the existing page padding. On long pages it follows the content normally; it is never fixed or overlaid. Print layout keeps its natural content height.
 Copy the source token scale without rounding: page max 1080px; padding 44px 56px; gap 64px; rail 200px, home rail 220px; year gutter 88px; measure 72ch; code bleed 22px. Mobile padding and code bleed 18px. The source's component-specific values remain unchanged. Desktop header/main+rail/footer frame; mobile home header/rail/list/footer, post header/article/footer. About/tags index/404 have no rail. Code and wide tables can scroll within their own region.
 
