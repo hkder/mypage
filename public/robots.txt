@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://hosungk.com/sitemap.xml

@@ -1,0 +1,14 @@
+---
+import { postUrl, type Post } from '../lib/posts';
+interface Props { readonly post: Post; readonly posts: readonly Post[] }
+const { post, posts } = Astro.props;
+const series = post.data.series;
+const entries = posts.filter((entry) => entry.data.series === series).toSorted((a, b) => a.data.date.getTime() - b.data.date.getTime() || a.id.localeCompare(b.id));
+const index = entries.findIndex((entry) => entry.id === post.id);
+const previous = entries[index - 1];
+const next = entries[index + 1];
+---
+{series && <nav class="series" aria-label="Series">
+    <p><strong>{series}</strong> · part {index + 1} of {entries.length}</p>
+    {(previous || next) && <p class="series-links">{previous && <a href={postUrl(previous)}>← {previous.data.title}</a>}{next && <a href={postUrl(next)}>{next.data.title} →</a>}</p>}
+</nav>}

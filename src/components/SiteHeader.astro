@@ -1,0 +1,12 @@
+---
+import { site } from '../lib/posts';
+interface Props { readonly current?: 'posts' | 'tags' | 'about' }
+const { current } = Astro.props;
+const links = [{ id: 'posts', href: '/', label: 'Posts' }, { id: 'tags', href: '/tags/', label: 'Tags' }, { id: 'about', href: '/about/', label: 'About' }];
+---
+<header class="site-header">
+    <a class="site-name" href="/">{site.name}</a>
+    <nav class="site-nav" aria-label="Site">
+        {links.map((link) => <a href={link.href} aria-current={current === link.id ? 'page' : undefined}>{link.label}</a>)}
+    </nav>
+</header>

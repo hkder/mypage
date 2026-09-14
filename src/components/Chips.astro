@@ -1,0 +1,11 @@
+---
+import { site } from '../lib/posts';
+interface Props { readonly tags?: readonly string[] }
+const { tags } = Astro.props;
+const links = tags ? tags.map((tag) => ({ label: tag, href: `/tags/${tag}/` })) : [
+    { label: 'GitHub', href: site.github }, { label: 'RSS', href: '/rss.xml' },
+];
+---
+<ul class:list={['chips', { 'post-tags': tags }]} aria-label={tags ? 'Tags' : 'Elsewhere'}>
+    {links.map((link) => <li><a class="chip" href={link.href}>{link.label}</a></li>)}
+</ul>

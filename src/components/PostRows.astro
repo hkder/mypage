@@ -1,0 +1,8 @@
+---
+import { formatDate, postUrl, type Post } from '../lib/posts';
+interface Props { readonly posts: readonly Post[]; readonly fullDate?: boolean }
+const { posts, fullDate = false } = Astro.props;
+---
+<ul class="post-list">
+    {posts.map((post) => <li class="post-row"><a href={postUrl(post)}>{post.data.title}</a><time datetime={post.data.date.toISOString().slice(0, 10)}>{formatDate(post.data.date, fullDate)}</time></li>)}
+</ul>

@@ -1,0 +1,14 @@
+---
+import Chips from './Chips.astro';
+import { site, tagsFor, type Post } from '../lib/posts';
+interface Props { readonly posts: readonly Post[] }
+const { posts } = Astro.props;
+---
+<aside class="rail">
+    <p class="about-line">{site.description} <a href="/about/">About</a>.</p>
+    <Chips />
+    <nav class="tag-nav" aria-label="Tags">
+        <h2 class="rail-label">Tags</h2>
+        <ul class="tag-list">{tagsFor(posts).map(({ tag, posts: entries }) => <li><a href={`/tags/${tag}/`}>{tag}</a><span class="count">{entries.length}</span></li>)}</ul>
+    </nav>
+</aside>

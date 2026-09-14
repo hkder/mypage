@@ -1,0 +1,9 @@
+---
+import { groupByYear, postUrl, type Post } from '../lib/posts';
+interface Props { readonly posts: readonly Post[]; readonly current: string }
+const { posts, current } = Astro.props;
+---
+<details class="all-posts">
+    <summary>All posts</summary>
+    <nav aria-label="All posts">{groupByYear(posts).map(({ year, posts: entries }) => <><p class="all-posts-year">{year}</p><ul>{entries.map((post) => <li><a href={postUrl(post)} aria-current={post.id === current ? 'page' : undefined}>{post.data.title}</a></li>)}</ul></>)}</nav>
+</details>

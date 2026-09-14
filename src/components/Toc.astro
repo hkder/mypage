@@ -1,0 +1,14 @@
+---
+import type { MarkdownHeading } from 'astro';
+interface Props { readonly headings: readonly MarkdownHeading[]; readonly variant: 'rail' | 'mobile' }
+const { headings, variant } = Astro.props;
+const sections = headings.filter((heading) => heading.depth === 2).map((heading) => {
+    const start = headings.indexOf(heading) + 1;
+    const next = headings.findIndex((entry, index) => index >= start && entry.depth <= 2);
+    return { ...heading, children: headings.slice(start, next < 0 ? undefined : next).filter((entry) => entry.depth === 3) };
+});
+---
+{sections.length > 0 && <details class={`toc toc--${variant}`} open={variant === 'rail'}>
+    <summary>Contents{variant === 'mobile' ? ' ▸' : ''}</summary>
+    <nav aria-label="Table of contents"><ol>{sections.map((heading) => <li><a href={`#${heading.slug}`}>{heading.text}</a>{heading.children.length > 0 && <ol>{heading.children.map((child) => <li><a href={`#${child.slug}`}>{child.text}</a></li>)}</ol>}</li>)}</ol></nav>
+</details>}
