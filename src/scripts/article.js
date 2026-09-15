@@ -1,21 +1,13 @@
 const article = document.querySelector('.article-body');
 const progress = document.querySelector('.progress span');
 if (article && progress) {
-  const headings = [...article.querySelectorAll('h2')];
-  const links = [...document.querySelectorAll('.contents a[href^="#"]')];
   let scheduled = false;
   const update = () => {
     const bounds = article.getBoundingClientRect();
-    const start = bounds.top + window.scrollY - 100;
+    const start = bounds.top + window.scrollY - document.querySelector('.header').getBoundingClientRect().height;
     const end = bounds.bottom + window.scrollY - window.innerHeight;
     const ratio = Math.min(1, Math.max(0, (window.scrollY - start) / Math.max(1, end - start)));
     progress.style.transform = `scaleX(${ratio})`;
-    let current = headings[0];
-    for (const heading of headings) if (heading.getBoundingClientRect().top <= 160) current = heading;
-    for (const link of links) {
-      if (link.getAttribute('href') === `#${current?.id}`) link.setAttribute('aria-current', 'location');
-      else link.removeAttribute('aria-current');
-    }
     scheduled = false;
   };
   const schedule = () => {

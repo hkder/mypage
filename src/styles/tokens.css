@@ -17,8 +17,6 @@
   --brand-icon: 35px;
   --brand-icon-mobile: 30px;
   --header-height: 100px;
-  --header-height-mobile: 82px;
-  --toc-top: 40px;
   --year-gutter: 72px;
   --paper: #f9f9f9;
   --ink: #1e293b;
@@ -38,8 +36,6 @@
   --s6: 48px;
   --s7: 64px;
   --page-gutter: 24px;
-  --profile-width: 180px;
-  --column-gap: 32px;
   --content-max: 960px;
   --reading-max: 760px;
   --reading-size: 17px;

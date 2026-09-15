@@ -4,7 +4,7 @@ import PostList from '../components/PostList.astro';
 import { publishedPosts } from '../lib/posts';
 const posts = await publishedPosts();
 ---
-<Layout title="Notes" current="posts" home>
+<Layout title="Notes" current="posts">
     <main id="main">
         <h1 class="visually-hidden">Notes</h1>
         <section class="archive" id="notes" aria-label="Notes by year"><PostList posts={posts} /></section>

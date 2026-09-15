@@ -1,10 +1,10 @@
 ---
 import type { MarkdownHeading } from 'astro';
-interface Props { readonly headings: readonly MarkdownHeading[]; readonly variant: 'rail' | 'mobile' }
-const { headings, variant } = Astro.props;
+interface Props { readonly headings: readonly MarkdownHeading[] }
+const { headings } = Astro.props;
 const sections = headings.filter((heading) => heading.depth === 2);
 ---
-{sections.length > 0 && (variant === 'mobile' ? <details class="mobile-contents">
+{sections.length > 0 && <details class="mobile-contents">
     <summary>In this note</summary>
     <nav aria-label="Table of contents"><ol>{sections.map((heading) => <li><a href={`#${heading.slug}`}>{heading.text}</a></li>)}</ol></nav>
-</details> : <><p class="contents-label">In this note</p><nav aria-label="Table of contents"><ol>{sections.map((heading) => <li><a href={`#${heading.slug}`}>{heading.text}</a></li>)}</ol></nav></>)}
+</details>}

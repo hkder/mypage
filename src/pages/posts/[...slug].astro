@@ -12,7 +12,6 @@ const { Content, headings } = await render(post);
 ---
 <Layout title={post.data.title} description={post.data.summary} current="posts" article>
     <main id="main" class="reader-layout">
-        <aside class="contents"><a class="back" href="/#notes">← Back to notes</a><Toc headings={headings} variant="rail" /></aside>
         <article class="reader">
             <header class="reader-heading">
                 <p class="eyebrow">{post.data.tags[0]?.replaceAll('-', ' ') ?? 'Notes'}</p>
@@ -23,7 +22,7 @@ const { Content, headings } = await render(post);
                     {post.data.updated && <span>Updated <time datetime={post.data.updated.toISOString().slice(0, 10)}>{formatDate(post.data.updated)}</time></span>}
                 </div>
             </header>
-            <Toc headings={headings} variant="mobile" />
+            <Toc headings={headings} />
             <div class="article-body"><Content /></div>
         </article>
     </main>

@@ -40,7 +40,7 @@ Use the pencil button on [the sample post](https://github.com/hkder/mypage/edit/
 - `summary` appears in feeds and page metadata. The home page displays only years, post titles, and dates.
 - Existing `image` metadata is retained but not displayed in the plain home list.
 
-File names become URLs: `your-post-title.md` → `/posts/your-post-title/`. Keep a published file name stable so links continue working. Use `##` headings for the automatic contents list; `###` headings organize subsections. Reading time is estimated at build time at 230 words/minute. Code is highlighted at build time. A small reader script adds code copying, reading progress, and the active contents link.
+File names become URLs: `your-post-title.md` → `/posts/your-post-title/`. Keep a published file name stable so links continue working. Use `##` headings for the automatic contents list; `###` headings organize subsections. Reading time is estimated at build time at 230 words/minute. Code is highlighted at build time. A small reader script adds code copying and reading progress.
 
 ## Edit About
 
