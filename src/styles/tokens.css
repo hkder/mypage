@@ -1,12 +1,10 @@
 :root {
   --type-base: 15px;
+  --type-archive-simple: 16px;
   --type-brand: 19px;
   --type-brand-mobile: 17px;
   --type-nav: 13px;
   --type-utility: 12px;
-  --type-profile: 13px;
-  --type-profile-heading: 18px;
-  --type-summary: 14px;
   --type-year: 24px;
   --type-year-mobile: 14px;
   --type-subheading: 20px;
@@ -21,7 +19,6 @@
   --header-height: 100px;
   --header-height-mobile: 82px;
   --toc-top: 40px;
-  --art-mobile-max: 240px;
   --year-gutter: 72px;
   --paper: #f9f9f9;
   --ink: #1e293b;
@@ -43,13 +40,10 @@
   --page-gutter: 24px;
   --profile-width: 180px;
   --column-gap: 32px;
-  --sticky-top: 48px;
   --content-max: 960px;
-  --art-max: 340px;
   --reading-max: 760px;
   --reading-size: 17px;
   --reading-leading: 1.75;
-  --feature-size: clamp(28px, 2.2vw, 32px);
   --reader-title-size: 36px;
   --section-size: 26px;
   --archive-size: 18px;

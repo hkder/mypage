@@ -1,23 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import PostList from '../components/PostList.astro';
-import { publishedPosts, postUrl } from '../lib/posts';
+import { publishedPosts } from '../lib/posts';
 const posts = await publishedPosts();
-const featured = posts[0];
 ---
 <Layout title="Notes" current="posts" home>
     <main id="main">
-        <div class="intro mobile-intro"><p><strong>Hi, I’m Hosung.</strong> This is where I work things out.<br />Right now: federated learning, small experiments, and plenty of questions. <a href="/about/">About me →</a></p></div>
-        {featured ? <section class:list={['feature', { 'feature-text-only': !featured.data.image }]} aria-labelledby="feature-title">
-            {featured.data.image && <figure class="feature-art"><a href={postUrl(featured)}><img {...featured.data.image} fetchpriority="high" /></a></figure>}
-            <div class="feature-copy"><h1 id="feature-title"><a href={postUrl(featured)}>{featured.data.title}</a></h1>{featured.data.summary && <p class="summary">{featured.data.summary}</p>}</div>
-        </section> : <h1>Notes</h1>}
+        <h1 class="visually-hidden">Notes</h1>
         <section class="archive" id="notes" aria-label="Notes by year"><PostList posts={posts} /></section>
     </main>
-    <aside slot="profile" class="home-profile" aria-labelledby="profile-title">
-        <h2 id="profile-title">Hi, I’m Hosung.</h2>
-        <p>Notes as I learn and work things out.</p>
-        <p><span class="profile-label">Right now</span>Federated learning, small experiments, and plenty of questions.</p>
-        <a class="profile-about" href="/about/">About me →</a>
-    </aside>
 </Layout>

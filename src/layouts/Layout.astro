@@ -37,8 +37,9 @@ const canonical = new URL(Astro.url.pathname, site.url);
     <body>
         {article && <div class="progress" aria-hidden="true"><span></span></div>}
         <a class="skip" href="#main">Skip to content</a>
-        <div class="shell">
-            {home ? <div class="home-layout"><div class="home-content"><SiteHeader current={current} /><slot /></div><slot name="profile" /></div> : <><SiteHeader current={current} /><slot /></>}
+        <div class:list={['shell', { 'home-shell': home }]} >
+            <SiteHeader current={current} />
+            <slot />
             <SiteFooter />
         </div>
     </body>

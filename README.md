@@ -14,7 +14,7 @@ The approved personal notebook design is documented in `DESIGN.md`.
 title: "My next federated learning note"
 date: 2026-09-14
 tags: [federated-learning, machine-learning]
-summary: "A one-sentence description for the home page and feeds."
+summary: "A one-sentence description for feeds."
 draft: false
 ---
 
@@ -37,8 +37,8 @@ Use the pencil button on [the sample post](https://github.com/hkder/mypage/edit/
 - `updated: 2026-09-15` adds an updated date. Change it when revising a published post.
 - `series` can record a series name; the reading page stays free of a separate series widget.
 - `tags` use lowercase words separated by hyphens. Tags and counts come from published posts.
-- `summary` appears under the latest post on the home page, in feeds, and in page metadata.
-- `image` optionally adds art to the latest-post feature: set `src` (under `/images/`), descriptive `alt`, and numeric `width` and `height`. Store the file in `public/images/`. Posts without an image use a text-only feature.
+- `summary` appears in feeds and page metadata. The home page displays only years, post titles, and dates.
+- Existing `image` metadata is retained but not displayed in the plain home list.
 
 File names become URLs: `your-post-title.md` → `/posts/your-post-title/`. Keep a published file name stable so links continue working. Use `##` headings for the automatic contents list; `###` headings organize subsections. Reading time is estimated at build time at 230 words/minute. Code is highlighted at build time. A small reader script adds code copying, reading progress, and the active contents link.
 
