@@ -2,36 +2,32 @@
 import { render } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import Toc from '../../components/Toc.astro';
-import AllPosts from '../../components/AllPosts.astro';
-import SeriesNav from '../../components/SeriesNav.astro';
-import Chips from '../../components/Chips.astro';
-import { publishedPosts, formatDate, readingTime, type Post } from '../../lib/posts';
+import { publishedPosts, formatDate, readingTime, site, type Post } from '../../lib/posts';
 export async function getStaticPaths() {
     return (await publishedPosts()).map((post) => ({ params: { slug: post.id }, props: { post } }));
 }
 interface Props { readonly post: Post }
 const { post } = Astro.props;
-const posts = await publishedPosts();
 const { Content, headings } = await render(post);
 ---
 <Layout title={post.data.title} description={post.data.summary} current="posts" article>
-    <main id="main" class="main main--post">
-        <article class="prose">
-            <h1>{post.data.title}</h1>
-            <p class="meta">
-                <time datetime={post.data.date.toISOString().slice(0, 10)}>{formatDate(post.data.date)}</time>
-                {post.data.updated && <span>Updated <time datetime={post.data.updated.toISOString().slice(0, 10)}>{formatDate(post.data.updated)}</time></span>}
-                <span>{readingTime(post)} min read</span>
-            </p>
+    <main id="main" class="reader-layout">
+        <aside class="contents"><a class="back" href="/#notes">← Back to notes</a><Toc headings={headings} variant="rail" /></aside>
+        <article class="reader">
+            <header class="reader-heading">
+                <p class="eyebrow">{post.data.tags[0]?.replaceAll('-', ' ') ?? 'Notes'}</p>
+                <h1>{post.data.title}</h1>
+                <div class="meta">
+                    <span>{site.name}</span><span class="dot" aria-hidden="true"></span><span>{readingTime(post)} min read</span><span class="dot" aria-hidden="true"></span>
+                    <time datetime={post.data.date.toISOString().slice(0, 10)}>{formatDate(post.data.date)}</time>
+                    {post.data.updated && <span>Updated <time datetime={post.data.updated.toISOString().slice(0, 10)}>{formatDate(post.data.updated)}</time></span>}
+                </div>
+            </header>
             <Toc headings={headings} variant="mobile" />
-            <SeriesNav post={post} posts={posts} />
-            <Content />
-            {post.data.tags.length > 0 && <Chips tags={post.data.tags} />}
-            <footer class="post-footer"><a href="/">All posts</a><a class="quiet" href="/rss.xml">Subscribe via RSS</a></footer>
+            <div class="article-body"><Content /></div>
         </article>
     </main>
-    <aside class="rail rail--post">
-        <Toc headings={headings} variant="rail" />
-        <AllPosts posts={posts} current={post.id} />
-    </aside>
 </Layout>
+<script>
+    import '../../scripts/article.js';
+</script>

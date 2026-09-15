@@ -2,11 +2,12 @@
 import { site } from '../lib/posts';
 interface Props { readonly current?: 'posts' | 'tags' | 'about' }
 const { current } = Astro.props;
-const links = [{ id: 'posts', href: '/', label: 'Posts' }, { id: 'tags', href: '/tags/', label: 'Tags' }, { id: 'about', href: '/about/', label: 'About' }];
 ---
-<header class="site-header">
-    <a class="site-mark" href="/"><img src="/favicon.svg?v=tree" alt="" width="32" height="32" /><span>{site.title}</span></a>
-    <nav class="site-nav" aria-label="Site">
-        {links.map((link) => <a href={link.href} aria-current={current === link.id ? 'page' : undefined}>{link.label}</a>)}
+<header class="header">
+    <a class="brand" href="/"><img src="/favicon.svg?v=tree" alt="" width="35" height="35" />{site.title}</a>
+    <nav class="nav" aria-label="Main">
+        <a href="/#notes" aria-current={current === 'posts' && Astro.url.pathname === '/' ? 'page' : undefined}>Notes</a>
+        <a href="/about/" aria-current={current === 'about' ? 'page' : undefined}>About</a>
+        <a href={site.github}>GitHub ↗</a>
     </nav>
 </header>

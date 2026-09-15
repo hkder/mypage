@@ -1,7 +1,7 @@
 # Hosung Kim's blog
 
 Live site: https://hosungk.com · Astro + Markdown, deployed by GitHub Pages.
-The design follows the supplied HTML/CSS handoff in `docs/design-handoff.md`.
+The approved personal notebook design is documented in `DESIGN.md`.
 
 ## Write a post in your browser
 
@@ -14,7 +14,7 @@ The design follows the supplied HTML/CSS handoff in `docs/design-handoff.md`.
 title: "My next federated learning note"
 date: 2026-09-14
 tags: [federated-learning, machine-learning]
-summary: "A one-sentence description for feeds."
+summary: "A one-sentence description for the home page and feeds."
 draft: false
 ---
 
@@ -35,11 +35,20 @@ Use the pencil button on [the sample post](https://github.com/hkder/mypage/edit/
 ## Optional front matter
 
 - `updated: 2026-09-15` adds an updated date. Change it when revising a published post.
-- `series: "Learning Federated Learning"` groups posts in chronological order and adds navigation between published members.
+- `series` can record a series name; the reading page stays free of a separate series widget.
 - `tags` use lowercase words separated by hyphens. Tags and counts come from published posts.
-- `summary` appears in feeds and page metadata, never in the home list.
+- `summary` appears under the latest post on the home page, in feeds, and in page metadata.
+- `image` optionally adds art to the latest-post feature: set `src` (under `/images/`), descriptive `alt`, and numeric `width` and `height`. Store the file in `public/images/`. Posts without an image use a text-only feature.
 
-File names become URLs: `your-post-title.md` → `/posts/your-post-title/`. Keep a published file name stable so links continue working. Use `##` and `###` headings for the automatic contents list. Reading time is estimated at build time at 230 words/minute. Code is highlighted at build time; no JavaScript reaches the reader.
+File names become URLs: `your-post-title.md` → `/posts/your-post-title/`. Keep a published file name stable so links continue working. Use `##` headings for the automatic contents list; `###` headings organize subsections. Reading time is estimated at build time at 230 words/minute. Code is highlighted at build time. A small reader script adds code copying, reading progress, and the active contents link.
+
+## Edit About
+
+Edit [your About Markdown](https://github.com/hkder/mypage/edit/main/src/content/pages/about.md), then commit to main. The `/about/` page updates with the next deployment.
+
+## License
+
+Original writing and snippets are licensed under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/). Bundled Merriweather fonts retain their separate OFL license in `public/fonts/Merriweather-OFL.txt`. The footer does not change third-party asset licenses.
 
 ## Local writing and preview
 

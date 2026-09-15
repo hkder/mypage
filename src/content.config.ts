@@ -10,6 +10,12 @@ const posts = defineCollection({
         tags: z.array(z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/)).default([]),
         series: z.string().optional(),
         summary: z.string().optional(),
+        image: z.object({
+            src: z.string().startsWith('/images/'),
+            alt: z.string().min(1),
+            width: z.number().int().positive(),
+            height: z.number().int().positive(),
+        }).optional(),
         draft: z.boolean().default(false),
     }),
 });

@@ -1,28 +1,19 @@
-# Hosung Kim — design system
+# Hosung’s personal notebook
 
-## 1. Atmosphere & Identity
-A quiet, reading-first personal engineering notebook. The exact contract is the supplied Spare Cycles HTML/CSS export, preserved in `docs/design-handoff.md`. Replace its fictional identity and articles with Hosung Kim and real writing; retain its layout and visual grammar. No generated design replaces this reference.
+Approved production design: a quiet, light technical notebook with a small tree identity, Merriweather reading typography, system-font navigation, and restrained green accents. The home page shows the newest published note and a year/title/date archive of real posts. No invented activity, sample cards, or subscription promotion.
 
-## 2. Color
-`src/styles/tokens.css` is copied verbatim from the export: paper #ececea; ink #161616; secondary #4f4f4d; muted #646462; accent #174f78; code background #e0e0dd. Underlines, chips and rules retain the source alpha values. Code hues: keyword #174f78, string #3f5c14, comment #5f5f5c, number #953724, function #5f3384. Light only.
+## Tokens and layout
 
-## 3. Typography
-Preserve every source type token: Charter/Bitstream Charter/Georgia body, system sans UI, system monospace code, math serif stack. Desktop body/row 19px, h1 36px, h2 25px, h3 20px; UI 14px, small 13px, label 11px, year 28px, name 17px. Body leading 1.6. At <=720px use the exact mobile overrides (body 17px, row 16px, h1 26px, h2 21px). Fonts remain system-local, with no remote font request.
+`src/styles/tokens.css` defines the palette, type roles, and spacing. Paper is #f9f9f9, ink #1e293b, muted text #59645d, accent #395b43, code surface #edf1ea. Desktop gutters are 24px, mobile gutters 16px. The home archive caps at 960px; feature artwork caps at 340px (240px on mobile). The right profile is 180px with a 32px gap, starts 132px below the top, and sticks at 48px. Below 1001px, an inline personal introduction replaces the profile. On mobile the feature headline comes before artwork.
 
-## 4. Spacing & Layout
-Home/tag sidebar update: show only the introduction, About link and GitHub chip; tags remain accessible through the header and feeds through the footer. Offset the sidebar 24px (`--space-5`) to the right above 720px, retaining its width and the main/header positions. Mobile has no offset.
-Footer update: the page fills at least the viewport height. Extra space belongs to the main content row so the footer sits at the bottom of short pages, with the existing page padding. On long pages it follows the content normally; it is never fixed or overlaid. Print layout keeps its natural content height.
-Copy the source token scale without rounding: page max 1080px; padding 44px 56px; gap 64px; rail 200px, home rail 220px; year gutter 88px; measure 72ch; code bleed 22px. Mobile padding and code bleed 18px. The source's component-specific values remain unchanged. Desktop header/main+rail/footer frame; mobile home header/rail/list/footer, post header/article/footer. About/tags index/404 have no rail. Code and wide tables can scroll within their own region.
+The reader is centered in its flexible column, capped at 760px, alongside a 180px contents rail sticky at 40px. Below 1001px contents become a native disclosure. Body type is 17px/1.75, mobile 16px/1.8; code and tables use 13px. Headings supply hierarchy without decorative dividers. No article cover, duplicate summary, or author/back-link footer row.
 
-## 5. Components
-Header update: a 32px rounded tree mark (`--size-site-mark`) sits beside “Hosung's Blog” in the existing name type scale, separated by `--space-2`. Both form the home link; Posts, Tags and About remain on the right. The tree uses sage foliage #aec5a1, dark-green outline #496443 and a brown trunk #705a42; these decorative asset colors do not alter the page palette. The same SVG serves as the favicon. The image is decorative and the visible blog title names the link. Page and feed titles use the blog title, while author and copyright remain Hosung Kim.
-Base layout owns head, skip link, page frame, SiteHeader and SiteFooter. PostList owns year groups and rows; PostRows owns shared date/title rows. Rail owns the description and GitHub chip. Toc owns rail-open/mobile-closed native details and nested h3 links. AllPosts owns closed details with current-post state. SeriesNav renders only published series members. Chips supplies real external/profile/feed and tag links. Article prose is generated from validated Markdown, with build-time headings, reading time and code syntax colors. Default, underline hover, visible keyboard focus and aria-current navigation retain the export. A visually hidden home h1 adds semantics without changing geometry. Native details do not pretend to track scrolling. Empty lists show a plain text state; long links wrap.
+## Shared primitives
 
-## 6. Motion & Interaction
-No client scripts, animation, transitions, sticky elements, dark toggle, cards, comments or share widgets. Links navigate normally; hover thickens underline. Native details supports keyboard open/close. Contents links navigate real heading IDs. The site works with JavaScript disabled.
+Astro Layout, SiteHeader, SiteFooter, PostList/PostRows, and Toc render real HTML. Home and reader share token-driven CSS. Writing stays in Markdown; published posts alone supply routes, archives, tags, feeds, and sitemap. About content is separately editable Markdown. Each post may supply its own optional image with intrinsic dimensions.
 
-## 7. Depth & Surface
-Exact flat paper surface with only the source's table/footnote rules and code/series fill. Chips are the only tinted navigation. No shadows, gradients or decorative hero imagery.
+The footer is normal document flow, with a flex shell filling short viewports. Never fix it to the screen or reposition it with JavaScript. Text only: copyright and “Writing & snippets: CC BY-NC 4.0”, linked to the official deed. No badge images or visible RSS links; feed discovery remains in the document head.
 
-## 8. Accessibility Constraints & Accepted Debt
-One h1 per page, semantic landmarks, skip link, keyboard focus, labelled navigation, correct dates, wrapped titles and local overflow. Target text contrast >=4.5:1. Preserve desktop/mobile source geometry and source small UI labels. Author profile verified via GitHub; no invented email or content license. The unprovided email chip is omitted; author portrait uses the verified public GitHub avatar. No analytics or tracking. Review readers on desktop/mobile, keyboard-only readers, and the author publishing Markdown. Drafts are excluded from all generated routes and feeds; a public repository is not private draft storage.
+## Accessibility and performance
+
+Semantic headings and navigation, visible keyboard focus, skip link, descriptive image alternative, native contents disclosure, horizontal code scrolling, copy status and honest failure guidance. Reader progress is decorative. Self-hosted WOFF2 Latin fonts load first, with separate fallback glyph ranges and font-display swap. Only reader pages load the small progressive-enhancement script. No browser framework, remote font calls, animation library, or layout-measuring footer code.

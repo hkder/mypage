@@ -4,6 +4,11 @@ date: 2026-09-14
 tags: [federated-learning, machine-learning]
 series: "Learning Federated Learning"
 summary: "A first look at learning across separate datasets, one round of FedAvg, and the experiment I want to build next."
+image:
+  src: /images/federated-garden.webp
+  alt: Three paper trees on separate islands, with roots connected to a shared seed
+  width: 680
+  height: 453
 draft: false
 ---
 

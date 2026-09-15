@@ -5,9 +5,9 @@ import { publishedPosts, tagsFor } from '../../lib/posts';
 const tags = tagsFor(await publishedPosts());
 ---
 <Layout title="Tags" current="tags">
-    <main id="main" class="main main--list main--wide">
-        <h1 class="list-heading">Tags</h1>
-        {tags.map(({ tag, posts }) => <section class="tag-group"><h2 class="tag-heading"><a href={`/tags/${tag}/`}>{tag}</a><span class="count">{posts.length}</span></h2><PostRows posts={posts} fullDate /></section>)}
+    <main id="main" class="about-page">
+        <h1>Tags</h1>
+        {tags.map(({ tag, posts }) => <section class="tag-group"><h2><a href={`/tags/${tag}/`}>{tag}</a> <span class="count">({posts.length})</span></h2><div class="archive-year"><PostRows posts={posts} fullDate /></div></section>)}
         {tags.length === 0 && <p>No tags yet.</p>}
     </main>
 </Layout>

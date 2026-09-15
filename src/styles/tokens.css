@@ -1,105 +1,56 @@
-/* Spare Cycles — design tokens
-   Single source of truth for colour, type, measure and spacing.
-   Light scheme only by decision (no prefers-color-scheme block).
-   Every value here is referenced by styles.css; nothing in styles.css is hard-coded. */
-
 :root {
-  /* Colour — neutral paper a shade below white to cut glare; warm-neutral greys for hierarchy.
-     Contrast on --color-bg: ink 16:1, ink-2 7.5:1, ink-3 5.6:1, link 7.6:1. */
-  --color-bg: #ececea;
-  --color-ink: #161616;
-  --color-ink-2: #4f4f4d;          /* secondary text: dates, meta, captions, footer */
-  --color-ink-3: #646462;          /* tertiary: rail labels, year numerals, TOC links */
-  --color-link: #174f78;
-  --color-link-underline: rgba(23, 79, 120, 0.6);
-  --color-chip-bg: rgba(23, 79, 120, 0.12);
-  --color-rule: rgba(22, 22, 22, 0.16);
-  --color-code-bg: #e0e0dd;
-  --color-focus: var(--color-link);
-
-  /* Code theme — five hues max, all ≥4.5:1 on --color-code-bg */
-  --code-keyword: #174f78;
-  --code-string: #3f5c14;
-  --code-comment: #5f5f5c;
-  --code-number: #953724;
-  --code-function: #5f3384;
-
-  /* Type families — system stacks; self-host Charter (charter.woff2, open licence) if you want it on non-Apple systems */
-  --font-body: Charter, "Bitstream Charter", Georgia, "Times New Roman", serif;
-  --font-ui: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Helvetica, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
-  --font-math: "STIX Two Math", "Cambria Math", "Latin Modern Math", Georgia, serif;
-
-  /* Type scale (desktop). h1 ≤ 2× body per brief. */
-  --text-body: 19px;
-  --text-row: 19px;                /* post title on list pages */
-  --text-h1: 36px;
-  --text-h2: 25px;
-  --text-h3: 20px;
-  --text-ui: 14px;                 /* nav, meta, dates, captions, table */
-  --text-small: 13px;              /* chips, footer, rail body */
-  --text-label: 11px;              /* uppercase rail labels, code language tag */
-  --text-code: 14px;
-  --text-year: 28px;               /* year numeral in the Home gutter */
-  --text-name: 17px;               /* site name */
-  --size-site-mark: 32px;
-  --leading-body: 1.6;
-  --leading-tight: 1.15;
-  --leading-ui: 1.5;
-  --tracking-heading: -0.015em;
-  --tracking-label: 0.08em;
-
-  /* Measure and layout */
-  --measure: 72ch;                 /* article column, in body-font ch */
-  --page-max: 1080px;
-  --rail-width: 200px;
-  --rail-width-home: 220px;
-  --year-gutter: 88px;
-  --column-gap: 64px;
-  --code-bleed: 22px;              /* how far code blocks extend into the margins */
-
-  /* Spacing scale — 4px base */
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 12px;
-  --space-4: 16px;
-  --space-5: 24px;
-  --space-6: 32px;
-  --space-7: 48px;
-  --space-8: 64px;
-  --page-padding-y: 44px;
-  --page-padding-x: 56px;
-  --header-gap: 56px;              /* header → content */
-  --group-gap: 48px;               /* between year groups */
-  --row-gap: 10px;                 /* between post rows */
-  --para-gap: 22px;
-  --heading-gap-top: 44px;
-  --heading-gap-bottom: 12px;
-
-  --radius-pill: 999px;
-}
-
-/* Mobile — one breakpoint. Everything else reflows via grid. */
-@media (max-width: 720px) {
-  :root {
-    --text-body: 17px;
-    --text-row: 16px;
-    --text-h1: 26px;
-    --text-h2: 21px;
-    --text-h3: 18px;
-    --text-ui: 12px;
-    --text-small: 12px;
-    --text-code: 12.5px;
-    --text-year: 12px;
-    --text-name: 15px;
-    --leading-body: 1.5;
-    --code-bleed: 18px;
-    --page-padding-y: 18px;
-    --page-padding-x: 18px;
-    --header-gap: 24px;
-    --group-gap: 30px;
-    --row-gap: 9px;
-    --para-gap: 16px;
-    --heading-gap-top: 32px;
-  }
+  --type-base: 15px;
+  --type-brand: 19px;
+  --type-brand-mobile: 17px;
+  --type-nav: 13px;
+  --type-utility: 12px;
+  --type-profile: 13px;
+  --type-profile-heading: 18px;
+  --type-summary: 14px;
+  --type-year: 24px;
+  --type-year-mobile: 14px;
+  --type-subheading: 20px;
+  --type-code: 13px;
+  --type-table: 13px;
+  --code-leading: 1.65;
+  --utility-leading: 1.8;
+  --space-tight: 4px;
+  --focus-width: 2px;
+  --brand-icon: 35px;
+  --brand-icon-mobile: 30px;
+  --header-height: 100px;
+  --header-height-mobile: 82px;
+  --toc-top: 40px;
+  --art-mobile-max: 240px;
+  --year-gutter: 72px;
+  --paper: #f9f9f9;
+  --ink: #1e293b;
+  --muted: #59645d;
+  --green: #395b43;
+  --green-hover: #294631;
+  --rule: #d9ded7;
+  --code-surface: #edf1ea;
+  --selection: #dce6d7;
+  --serif: Merriweather, Georgia, serif;
+  --sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --s1: 8px;
+  --s2: 12px;
+  --s3: 16px;
+  --s4: 24px;
+  --s5: 32px;
+  --s6: 48px;
+  --s7: 64px;
+  --page-gutter: 24px;
+  --profile-width: 180px;
+  --column-gap: 32px;
+  --sticky-top: 48px;
+  --content-max: 960px;
+  --art-max: 340px;
+  --reading-max: 760px;
+  --reading-size: 17px;
+  --reading-leading: 1.75;
+  --feature-size: clamp(28px, 2.2vw, 32px);
+  --reader-title-size: 36px;
+  --section-size: 26px;
+  --archive-size: 18px;
 }

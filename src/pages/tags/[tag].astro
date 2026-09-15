@@ -1,7 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import PostList from '../../components/PostList.astro';
-import Rail from '../../components/Rail.astro';
 import { publishedPosts, tagsFor, type Post } from '../../lib/posts';
 export async function getStaticPaths() {
     return tagsFor(await publishedPosts()).map(({ tag, posts }) => ({ params: { tag }, props: { tag, posts } }));
@@ -10,9 +9,8 @@ interface Props { readonly tag: string; readonly posts: readonly Post[] }
 const { tag, posts } = Astro.props;
 ---
 <Layout title={tag} description={`Posts about ${tag} by Hosung Kim.`} current="tags">
-    <main id="main" class="main main--list">
-        <h1 class="list-heading">{tag} <span class="count">({posts.length})</span></h1>
-        <PostList posts={posts} />
+    <main id="main" class="about-page">
+        <h1>{tag} <span class="count">({posts.length})</span></h1>
+        <section class="archive"><PostList posts={posts} /></section>
     </main>
-    <Rail />
 </Layout>

@@ -9,9 +9,10 @@ interface Props {
     readonly description?: string;
     readonly current?: 'posts' | 'tags' | 'about';
     readonly article?: boolean;
+    readonly home?: boolean;
     readonly noindex?: boolean;
 }
-const { title, description = site.description, current, article = false, noindex = false } = Astro.props;
+const { title, description = site.description, current, article = false, home = false, noindex = false } = Astro.props;
 const canonical = new URL(Astro.url.pathname, site.url);
 ---
 <!doctype html>
@@ -21,6 +22,7 @@ const canonical = new URL(Astro.url.pathname, site.url);
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>{title} · {site.title}</title>
         <meta name="description" content={description} />
+        <link rel="preload" href="/fonts/merriweather-regular-latin.woff2" as="font" type="font/woff2" crossorigin />
         <link rel="canonical" href={canonical} />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=tree" />
         <link rel="alternate" type="application/rss+xml" title={site.title} href="/rss.xml" />
@@ -33,10 +35,10 @@ const canonical = new URL(Astro.url.pathname, site.url);
         {noindex && <meta name="robots" content="noindex" />}
     </head>
     <body>
+        {article && <div class="progress" aria-hidden="true"><span></span></div>}
         <a class="skip" href="#main">Skip to content</a>
-        <div class="page">
-            <SiteHeader current={current} />
-            <slot />
+        <div class="shell">
+            {home ? <div class="home-layout"><div class="home-content"><SiteHeader current={current} /><slot /></div><slot name="profile" /></div> : <><SiteHeader current={current} /><slot /></>}
             <SiteFooter />
         </div>
     </body>

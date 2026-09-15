@@ -4,5 +4,5 @@ import { groupByYear, type Post } from '../lib/posts';
 interface Props { readonly posts: readonly Post[] }
 const { posts } = Astro.props;
 ---
-{groupByYear(posts).map(({ year, posts: entries }) => <section class="year-group"><h2 class="year">{year}</h2><PostRows posts={entries} /></section>)}
+{groupByYear(posts).map(({ year, posts: entries }) => <section class="archive-year"><h2>{year}</h2><PostRows posts={entries} /></section>)}
 {posts.length === 0 && <p>No posts yet.</p>}

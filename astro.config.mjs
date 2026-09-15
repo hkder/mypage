@@ -10,7 +10,7 @@ export default defineConfig({
             theme: {
                 name: 'spare-cycles',
                 type: 'light',
-                colors: { 'editor.background': '#e0e0dd', 'editor.foreground': '#161616' },
+                colors: { 'editor.background': '#edf1ea', 'editor.foreground': '#161616' },
                 tokenColors: [
                     { scope: ['keyword', 'storage'], settings: { foreground: '#174f78' } },
                     { scope: 'string', settings: { foreground: '#3f5c14' } },
@@ -25,7 +25,10 @@ export default defineConfig({
                         type: 'element',
                         tagName: 'figure',
                         properties: { className: ['code'], dataLang: this.options.lang },
-                        children: tree.children.filter((node) => node.type !== 'doctype'),
+                        children: [{
+                            type: 'element', tagName: 'figcaption', properties: { className: ['code-toolbar'] },
+                            children: [{ type: 'element', tagName: 'span', properties: {}, children: [{ type: 'text', value: this.options.lang === 'python' ? 'Python' : this.options.lang }] }],
+                        }, ...tree.children.filter((node) => node.type !== 'doctype')],
                     }];
                 },
             }],

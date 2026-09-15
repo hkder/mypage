@@ -1,14 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Chips from '../components/Chips.astro';
+import { Content } from '../content/pages/about.md';
 ---
 <Layout title="About" current="about">
-    <main id="main" class="main prose main--about">
+    <main id="main" class="about-page">
         <h1>About</h1>
-        <img class="about-photo" src="/author.png" alt="Hosung Kim’s GitHub profile picture" width="120" height="120" />
-        <p>I'm Hosung Kim. This is my notebook for learning in public: working through ideas, reading papers, and turning questions into experiments.</p>
-        <p>I'm starting with federated learning. How do we train a useful shared model when the data lives in different places? What changes when those places see different kinds of data?</p>
-        <p>These posts begin with the basics and build from there. I'll keep the assumptions visible, distinguish examples from measurements, and update the notes as I learn.</p>
-        <Chips />
+        <div class="article-body"><Content /></div>
+        <a class="read-link" href="/">← Back to my notes</a>
     </main>
 </Layout>
