@@ -1,10 +1,16 @@
 ---
 import { site } from '../lib/posts';
+import KeyIcon from './KeyIcon.astro';
 interface Props { readonly current?: 'posts' | 'tags' | 'about' }
 const { current } = Astro.props;
 ---
 <header class="header">
-    <a class="brand" href="/" aria-keyshortcuts="Shift+Enter"><img src="/favicon.svg?v=tree" alt="" width="35" height="35" draggable="false" />{site.title}</a>
+    <a class="brand" href="/" aria-keyshortcuts="Shift+Enter">
+        <span class="tree-mark"><img src="/favicon.svg?v=tree" alt="" width="35" height="35" draggable="false" />
+            {[1, 2, 3].map(number => <KeyIcon class={`tree-fruit fruit-${number}`} />)}
+            <span class="tree-glint glint-one" aria-hidden="true"></span><span class="tree-glint glint-two" aria-hidden="true"></span>
+        </span>{site.title}
+    </a>
     <nav class="nav" aria-label="Main">
         <a href="/#notes" aria-current={current === 'posts' && Astro.url.pathname === '/' ? 'page' : undefined}>Notes</a>
         <a href="/about/" aria-current={current === 'about' ? 'page' : undefined}>About</a>

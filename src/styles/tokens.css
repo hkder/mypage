@@ -23,6 +23,11 @@
   --muted: #59645d;
   --green: #395b43;
   --green-hover: #294631;
+  --key-gold: #ad7620;
+  --key-glint: #e6bd68;
+  --harvest-hold: 2000ms;
+  --harvest-flight: 900ms;
+  --harvest-settle: 260ms;
   --rule: #d9ded7;
   --code-surface: #edf1ea;
   --selection: #dce6d7;
