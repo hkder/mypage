@@ -6,4 +6,25 @@ import { site } from '../lib/posts';
         <p>© {new Date().getUTCFullYear()} {site.name}</p>
         <p class="license">Writing &amp; snippets: <a href="https://creativecommons.org/licenses/by-nc/4.0/" rel="license noopener noreferrer" target="_blank">CC BY-NC 4.0</a></p>
     </div>
+    <a id="writing-shortcut" class="writing-shortcut" href="https://hosung-author.hosungk.workers.dev/" aria-label="Private writing" title="Private writing" hidden>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="4" /><path d="m11 11 9 9m-3-3 3-3m-6 0 3-3" /></svg>
+    </a>
 </footer>
+
+<script>
+    const shortcut = document.querySelector<HTMLAnchorElement>('#writing-shortcut');
+    const url = new URL(window.location.href);
+    const enable = url.searchParams.get('writer') === '1';
+    let visible = enable;
+    try {
+        if (enable) localStorage.setItem('hosung-writing-shortcut', '1');
+        visible = visible || localStorage.getItem('hosung-writing-shortcut') === '1';
+    } catch {
+        // The setup link still works on this page when browser storage is unavailable.
+    }
+    if (shortcut) shortcut.hidden = !visible;
+    if (enable) {
+        url.searchParams.delete('writer');
+        history.replaceState(history.state, '', url);
+    }
+</script>
