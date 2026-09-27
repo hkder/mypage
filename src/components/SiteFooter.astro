@@ -13,18 +13,56 @@ import { site } from '../lib/posts';
 
 <script>
     const shortcut = document.querySelector<HTMLAnchorElement>('#writing-shortcut');
+    const brand = document.querySelector<HTMLAnchorElement>('.brand');
+    function showShortcut(focus = false) {
+        try { localStorage.setItem('hosung-writing-shortcut', '1'); }
+        catch { /* The shortcut remains usable on this page without storage. */ }
+        if (!shortcut) return;
+        shortcut.hidden = false;
+        if (focus) {
+            shortcut.focus({ preventScroll: true });
+            shortcut.scrollIntoView({ block: 'center' });
+        }
+    }
     const url = new URL(window.location.href);
     const enable = url.searchParams.get('writer') === '1';
-    let visible = enable;
     try {
-        if (enable) localStorage.setItem('hosung-writing-shortcut', '1');
-        visible = visible || localStorage.getItem('hosung-writing-shortcut') === '1';
-    } catch {
-        // The setup link still works on this page when browser storage is unavailable.
-    }
-    if (shortcut) shortcut.hidden = !visible;
+        if (shortcut) shortcut.hidden = localStorage.getItem('hosung-writing-shortcut') !== '1';
+    } catch { /* Ordinary visits stay hidden when browser storage is unavailable. */ }
     if (enable) {
+        showShortcut();
         url.searchParams.delete('writer');
         history.replaceState(history.state, '', url);
     }
+    let press: { id: number; time: number; x: number; y: number } | undefined;
+    let suppressClick = false;
+    const cancel = () => { press = undefined; };
+    brand?.addEventListener('pointerdown', event => {
+        cancel(); suppressClick = false;
+        if (event.button !== 0 || !event.isPrimary || event.ctrlKey || event.metaKey || event.altKey || event.shiftKey
+            || !(event.target instanceof HTMLImageElement)) return;
+        press = { id: event.pointerId, time: performance.now(), x: event.clientX, y: event.clientY };
+    });
+    window.addEventListener('pointermove', event => {
+        if (press && event.pointerId === press.id && Math.hypot(event.clientX - press.x, event.clientY - press.y) > 12) cancel();
+    });
+    window.addEventListener('pointerup', event => {
+        if (!press || event.pointerId !== press.id) return;
+        const held = performance.now() - press.time >= 2000;
+        cancel();
+        if (!held) return;
+        suppressClick = true;
+        requestAnimationFrame(() => showShortcut(true));
+    });
+    brand?.addEventListener('click', event => {
+        if (suppressClick) { event.preventDefault(); suppressClick = false; }
+    });
+    brand?.addEventListener('contextmenu', event => { if (press) event.preventDefault(); });
+    brand?.addEventListener('pointerleave', cancel);
+    window.addEventListener('pointercancel', cancel);
+    window.addEventListener('blur', cancel);
+    brand?.addEventListener('keydown', event => {
+        if (event.key === 'Escape') cancel();
+        if (event.key === 'Enter' && event.shiftKey) { event.preventDefault(); showShortcut(true); }
+    });
 </script>
