@@ -44,8 +44,8 @@ button { font: inherit; }
 .brand img { width: var(--brand-icon); height: var(--brand-icon); user-select: none; -webkit-touch-callout: none; }
 .tree-mark { position: relative; flex: none; display: inline-flex; width: var(--brand-icon); height: var(--brand-icon); user-select: none; -webkit-touch-callout: none; transform-origin: center bottom; }
 .tree-mark img { transform-origin: center 85%; transition: transform var(--harvest-settle) cubic-bezier(.2,.8,.2,1); }
-.tree-mark.is-growing { animation: tree-sway var(--harvest-hold) ease-in-out both; }
-.tree-mark.is-growing img { transform: scale(1.42); transition-duration: var(--harvest-hold); transition-timing-function: linear; }
+.tree-mark.is-growing { animation: tree-sway var(--harvest-grow) ease-in-out both; }
+.tree-mark.is-growing img { transform: scale(1.42); transition-duration: var(--harvest-grow); transition-timing-function: linear; }
 .tree-fruit { position: absolute; width: 18px; height: 18px; color: var(--key-gold); pointer-events: none; opacity: 0; transform: scale(0) rotate(-25deg); transition: transform var(--harvest-settle) cubic-bezier(.18,.9,.25,1.35), opacity var(--harvest-settle); }
 .tree-fruit circle { fill: var(--paper); }
 .fruit-1 { left: -18%; top: 0; }

@@ -26,6 +26,7 @@
   --key-gold: #ad7620;
   --key-glint: #e6bd68;
   --harvest-hold: 2000ms;
+  --harvest-grow: 2000ms;
   --harvest-flight: 900ms;
   --harvest-settle: 260ms;
   --rule: #d9ded7;

@@ -8,9 +8,11 @@ function attach(brand: HTMLAnchorElement, tree: HTMLElement, shortcut: HTMLAncho
     return parseFloat(value) * (value.endsWith('ms') ? 1 : 1000);
   };
   const holdDuration = duration('--harvest-hold');
+  const growthDuration = duration('--harvest-grow');
   const flightDuration = duration('--harvest-flight');
   let press: { readonly id: number; readonly x: number; readonly y: number } | undefined;
   let holdTimer: ReturnType<typeof setTimeout> | undefined;
+  let growthTimer: ReturnType<typeof setTimeout> | undefined;
   let frame = 0;
   let busy = false;
   let suppressClick = false;
@@ -23,13 +25,13 @@ function attach(brand: HTMLAnchorElement, tree: HTMLElement, shortcut: HTMLAncho
   const cancelHold = () => {
     clearTimeout(holdTimer);
     press = undefined;
-    tree.classList.remove('is-growing');
   };
   const stopFlight = () => {
+    clearTimeout(growthTimer);
     cancelAnimationFrame(frame);
     flight.hidden = true;
     busy = false;
-    tree.classList.remove('is-harvested');
+    tree.classList.remove('is-growing', 'is-harvested');
     shortcut.classList.remove('is-landing');
   };
   const finish = () => {
@@ -39,10 +41,8 @@ function attach(brand: HTMLAnchorElement, tree: HTMLElement, shortcut: HTMLAncho
     if (!reducedMotion.matches) shortcut.classList.add('is-landing');
   };
   const harvest = () => {
-    if (busy) return;
     const source = tree.getBoundingClientRect();
-    suppressClick = press !== undefined;
-    cancelHold();
+    tree.classList.remove('is-growing');
     showShortcut();
     if (reducedMotion.matches) {
       shortcut.scrollIntoView({ block: 'nearest', behavior: 'instant' });
@@ -77,6 +77,18 @@ function attach(brand: HTMLAnchorElement, tree: HTMLElement, shortcut: HTMLAncho
     };
     frame = requestAnimationFrame(tick);
   };
+  const grow = () => {
+    if (busy) return;
+    suppressClick = press !== undefined;
+    cancelHold();
+    busy = true;
+    if (reducedMotion.matches) {
+      harvest();
+      return;
+    }
+    tree.classList.add('is-growing');
+    growthTimer = setTimeout(harvest, growthDuration);
+  };
 
   const url = new URL(location.href);
   try { shortcut.hidden = localStorage.getItem('hosung-writing-shortcut') !== '1'; }
@@ -92,8 +104,7 @@ function attach(brand: HTMLAnchorElement, tree: HTMLElement, shortcut: HTMLAncho
     if (event.button !== 0 || !event.isPrimary || event.ctrlKey || event.metaKey || event.altKey || event.shiftKey
       || !(event.target instanceof Element) || !tree.contains(event.target)) return;
     press = { id: event.pointerId, x: event.clientX, y: event.clientY };
-    tree.classList.add('is-growing');
-    holdTimer = setTimeout(harvest, holdDuration);
+    holdTimer = setTimeout(grow, holdDuration);
   });
   window.addEventListener('pointermove', event => {
     if (press && event.pointerId === press.id && Math.hypot(event.clientX - press.x, event.clientY - press.y) > 12) cancelHold();
@@ -114,7 +125,7 @@ function attach(brand: HTMLAnchorElement, tree: HTMLElement, shortcut: HTMLAncho
   document.addEventListener('keydown', event => { if (event.key === 'Escape') interrupt(); });
   reducedMotion.addEventListener('change', interrupt);
   brand.addEventListener('keydown', event => {
-    if (event.key === 'Enter' && event.shiftKey) { event.preventDefault(); harvest(); }
+    if (event.key === 'Enter' && event.shiftKey) { event.preventDefault(); grow(); }
   });
   shortcut.addEventListener('animationend', () => shortcut.classList.remove('is-landing'));
 }
